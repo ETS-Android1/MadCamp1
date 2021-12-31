@@ -5,6 +5,12 @@
       <map>
         <entry key="..\:/Users/river/AndroidStudioProjects/MadCamp1/app/src/main/res/layout/activity_main.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/river/AndroidStudioProjects/MadCamp1/app/src/main/res/layout/item_contact_android.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/dialog_contact.xml" value="0.16109422492401215" />
+        <entry key="app/src/main/res/layout/fragment_contact.xml" value="0.16109422492401215" />
+        <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.16576086956521738" />
+        <entry key="app/src/main/res/layout/fragment_voice_record.xml" value="0.16109422492401215" />
+        <entry key="app/src/main/res/layout/item_contact.xml" value="0.16109422492401215" />
+        <entry key="app/src/main/res/layout/item_contact_android.xml" value="0.16109422492401215" />
       </map>
     </option>
   </component>
