@@ -35,7 +35,6 @@ public class FragmentGallery extends Fragment {
     public FragmentGallery() {
     }
 
-    ImageView m_imageview;
     PhotoViewAttacher mAttacher;
 
 
