@@ -1,7 +1,11 @@
 package com.example.madcamp1;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.os.Bundle;
 
@@ -18,15 +22,18 @@ import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.Gallery;
 import android.widget.ImageView;
 
 import com.github.chrisbanes.photoview.PhotoViewAttacher;
 
+import java.io.InputStream;
 import java.util.List;
 
 public class FragmentGallery extends Fragment {
 
+    private static final int PICK_IMAGE = 10;
     View v;
     Gallery simpleGallery;
     private ImageView selectedImageView;
@@ -46,6 +53,7 @@ public class FragmentGallery extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_gallery, container, false);
 
+        Button btn = v.findViewById(R.id.button);
         simpleGallery = v.findViewById(R.id.languagesGallery);
         selectedImageView = v.findViewById(R.id.img);
 
@@ -64,7 +72,16 @@ public class FragmentGallery extends Fragment {
             }
         });
 
-
+        //버 클릭 시튼
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override //이미지 불러오기기(갤러리 접근)
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType
+                        (android.provider.MediaStore.Images.Media.CONTENT_TYPE);
+                startActivityForResult(intent, PICK_IMAGE);
+            }
+        });
 
 
         return v;
@@ -73,6 +90,8 @@ public class FragmentGallery extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
 
     }
 
@@ -107,7 +126,27 @@ public class FragmentGallery extends Fragment {
         }
     }
 
+    @Override //갤러리에서 이미지 불러온 후 행동
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Check which request we're responding to
+        if (requestCode == PICK_IMAGE) {
+            // Make sure the request was successful
+            if (resultCode == Activity.RESULT_OK) {
+                try {
+                    final Context context = getActivity().getApplicationContext();
+                    // 선택한 이미지에서 비트맵 생성
+                    InputStream in = context.getContentResolver().openInputStream(data.getData());
+                    Bitmap img = BitmapFactory.decodeStream(in);
+                    in.close();
+                    // 이미지뷰에 세팅
+                    selectedImageView.setImageBitmap(img);
 
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
 
 }

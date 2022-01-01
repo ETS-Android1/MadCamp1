@@ -13,19 +13,28 @@
         android:layout_width="fill_parent"
         android:layout_height="300dp"
         android:scaleType="fitXY"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="80dp"/>
 
     <!-- By using android:spacing we can give spacing between images
          android:animationDuration="3000" -> for animation running -->
     <Gallery
         android:id="@+id/languagesGallery"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="100dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="20dp"
         android:animationDuration="2000"
-        android:padding="10dp"
+        android:padding="0dp"
         android:spacing="5dp"
         android:unselectedAlpha="50" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="휴대폰 갤러리 모드"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="center" />
 
 
 </LinearLayout>
