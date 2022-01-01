@@ -42,9 +42,9 @@ public class FragmentContact extends Fragment {
         v = inflater.inflate(R.layout.fragment_contact, container, false);
 
         myrecyclerview = v.findViewById(R.id.contact_recyclerview);
-        RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(getContext(), contactList);
+        RecyclerViewAdapter2 recyclerViewAdapter2 = new RecyclerViewAdapter2(getContext(), contactItemList);
         myrecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
-        myrecyclerview.setAdapter(recyclerViewAdapter);
+        myrecyclerview.setAdapter(recyclerViewAdapter2);
 
         return v;
     }
@@ -53,7 +53,7 @@ public class FragmentContact extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         InitializeContact();
-        //contactItemList = getContactItemList();
+        contactItemList = getContactItemList();
     }
 
     public ArrayList<ContactItem> getContactItemList() {
@@ -66,7 +66,7 @@ public class FragmentContact extends Fragment {
         };
         String[] selectionArgs = null;
         String sortOrder = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " COLLATE LOCALIZED ASC";
-        Cursor cursor = v.getContext().getContentResolver().query(uri, projection, null, selectionArgs, sortOrder);
+        Cursor cursor = getActivity().getContentResolver().query(uri, projection, null, selectionArgs, sortOrder);
         LinkedHashSet<ContactItem> hashlist = new LinkedHashSet<>();
         if (cursor.moveToFirst()) {
             do {

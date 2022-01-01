@@ -1,6 +1,8 @@
 package com.example.madcamp1;
 
-public class ContactItem {
+import java.io.Serializable;
+
+public class ContactItem implements Serializable {
     private String name;
     private String phoneNumber;
     private int id;
