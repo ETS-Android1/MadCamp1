@@ -42,9 +42,9 @@ public class FragmentContact extends Fragment {
         v = inflater.inflate(R.layout.fragment_contact, container, false);
 
         myrecyclerview = v.findViewById(R.id.contact_recyclerview);
-        RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(getContext(), contactList);
+        RecyclerViewAdapter2 recyclerViewAdapter2 = new RecyclerViewAdapter2(getContext(), contactItemList);
         myrecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
-        myrecyclerview.setAdapter(recyclerViewAdapter);
+        myrecyclerview.setAdapter(recyclerViewAdapter2);
 
         return v;
     }
@@ -53,7 +53,7 @@ public class FragmentContact extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         InitializeContact();
-        //contactItemList = getContactItemList();
+        contactItemList = getContactItemList();
     }
 
     public ArrayList<ContactItem> getContactItemList() {
@@ -62,11 +62,11 @@ public class FragmentContact extends Fragment {
                 ContactsContract.CommonDataKinds.Phone.NUMBER,
                 ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
                 ContactsContract.Contacts.PHOTO_ID,
-                ContactsContract.Contacts._ID
+                ContactsContract.RawContacts.CONTACT_ID
         };
         String[] selectionArgs = null;
         String sortOrder = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " COLLATE LOCALIZED ASC";
-        Cursor cursor = v.getContext().getContentResolver().query(uri, projection, null, selectionArgs, sortOrder);
+        Cursor cursor = getActivity().getContentResolver().query(uri, projection, null, null, sortOrder);
         LinkedHashSet<ContactItem> hashlist = new LinkedHashSet<>();
         if (cursor.moveToFirst()) {
             do {
@@ -77,14 +77,13 @@ public class FragmentContact extends Fragment {
                 contactItem.setName(cursor.getString(1));
                 contactItem.setPhoto_id(photo_id);
                 contactItem.setPerson_id(person_id);
-
                 hashlist.add(contactItem);
             } while (cursor.moveToNext());
         }
 
         ArrayList<ContactItem> contactItems = new ArrayList<>(hashlist);
         for (int i = 0; i < contactItems.size(); i++) {
-            contactItems.get(i).setId(i);
+            contactItems.get(i).setId(i + 1);
         }
 
         if (cursor != null) {

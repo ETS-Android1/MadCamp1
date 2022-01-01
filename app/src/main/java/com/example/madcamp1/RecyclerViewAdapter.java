@@ -24,7 +24,6 @@ import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
 
-    //액티비티의 Context, Data추가
     Context mContext;
     List<Contact> mData;
     Dialog mDialog;

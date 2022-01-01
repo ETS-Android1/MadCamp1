@@ -1,10 +1,15 @@
 package com.example.madcamp1;
 
-public class ContactItem {
+import android.graphics.Bitmap;
+
+import java.io.Serializable;
+
+public class ContactItem implements Serializable {
     private String name;
     private String phoneNumber;
     private int id;
     private long photo_id = 0, person_id = 0;
+    private Bitmap photo;
 
     public ContactItem() {
     }
@@ -29,8 +34,12 @@ public class ContactItem {
         return id;
     }
 
-    public int getPhoto() {
-        return R.mipmap.ic_launcher_round;
+    public Bitmap getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(Bitmap photo) {
+        this.photo = photo;
     }
 
     public void setPhoto_id(long photo_id) {
