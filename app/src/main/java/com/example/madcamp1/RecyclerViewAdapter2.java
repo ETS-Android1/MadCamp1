@@ -5,9 +5,12 @@ import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.net.Uri;
@@ -20,10 +23,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -65,6 +70,27 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewAdapt
         v = LayoutInflater.from(mContext).inflate(R.layout.item_contact_android, parent, false);
         MyViewHolder vHolder = new MyViewHolder(v);
 
+        //Dialog init
+        mDialog = new Dialog(mContext);
+        mDialog.setContentView(R.layout.dialog_contact);
+        mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        //------------------------------------------------------------------------------------------
+        vHolder.item_contact_and.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView dialog_name_tv = mDialog.findViewById(R.id.dialog_name);
+                TextView dialog_phone_tv = mDialog.findViewById(R.id.dialog_phone);
+                ImageView dialog_contact_img = mDialog.findViewById(R.id.dialog_img);
+                dialog_name_tv.setText(mData.get(vHolder.getAdapterPosition()).getName());
+                dialog_phone_tv.setText(mData.get(vHolder.getAdapterPosition()).getPhone());
+
+                dialog_contact_img.setImageBitmap(mData.get(vHolder.getAdapterPosition()).getPhoto());
+
+                mDialog.show();
+            }
+        });
+        //------------------------------------------------------------------------------------------
 
         vHolder.item_call.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +107,6 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewAdapt
                 Uri smsUri = Uri.parse("sms:" + phone_number);
                 Intent sendIntent = new Intent(Intent.ACTION_SENDTO, smsUri);
                 mContext.startActivity(sendIntent);
-
             }
         });
 
@@ -101,7 +126,8 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewAdapt
                 holder.img.setBackground(new ShapeDrawable(new OvalShape()));
                 holder.img.setClipToOutline(true);
             }
-            holder.img.setImageBitmap(profile);
+            mData.get(holder.getAdapterPosition()).setPhoto(profile);
+            holder.img.setImageBitmap(resizingBitmap(profile));
         } else {
             if (Build.VERSION.SDK_INT >= 21) {
                 holder.img.setClipToOutline(false);
@@ -115,27 +141,17 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewAdapt
         return mData.size();
     }
 
-    public Bitmap loadContactPhoto(ContentResolver cr, long id, long photo_id) {
-        byte[] photoBytes = null;
-        Uri photoUri = ContentUris.withAppendedId(ContactsContract.Data.CONTENT_URI, photo_id);
-        Cursor c = cr.query(photoUri, new String[]{ContactsContract.CommonDataKinds.Photo.PHOTO},
-                null, null, null);
+    public Bitmap loadContactPhoto(ContentResolver cr, long person_id, long photo_id) {
+        Uri my_contact_Uri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, person_id);
+        InputStream photo_stream = ContactsContract.Contacts.openContactPhotoInputStream(cr, my_contact_Uri, true);
+        BufferedInputStream buf = new BufferedInputStream(photo_stream);
+        Bitmap my_btmp = BitmapFactory.decodeStream(buf);
         try {
-            if (c.moveToFirst())
-                photoBytes = c.getBlob(0);
-        } catch (Exception e) {
+            buf.close();
+        } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            c.close();
         }
-
-        if (photoBytes != null) {
-            return resizingBitmap(BitmapFactory.decodeByteArray(photoBytes, 0, photoBytes.length));
-        } else
-            Log.d("<<CONTACT_PHOTO>>", "second try also failed");
-
-        return null;
-
+        return my_btmp;
     }
 
     public Bitmap resizingBitmap(Bitmap oBitmap) {
