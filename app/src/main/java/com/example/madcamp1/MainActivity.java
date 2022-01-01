@@ -41,15 +41,12 @@ public class MainActivity extends AppCompatActivity {
         // super.onBackPressed();
 
         // 2000 ms = 2 sec
-        if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
+        if (System.currentTimeMillis() > backKeyPressedTime + 1000) {
             backKeyPressedTime = System.currentTimeMillis();
-            Toast.makeText(this, "\'뒤로가기\' 버튼을 한 번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT);
+            Toast.makeText(getApplicationContext(), "\'뒤로가기\' 버튼을 한 번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show();
             return;
-        }
-
-        if (System.currentTimeMillis() <= backKeyPressedTime + 2000){
+        } else if (System.currentTimeMillis() <= backKeyPressedTime + 1000){
             finish();
-            toast.cancel();
         }
 
     }
