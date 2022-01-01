@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#fff"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <!-- create a ImageView and Gallery -->
-    <ImageView
-        android:id="@+id/imageView"
+    <com.github.chrisbanes.photoview.PhotoView
+        android:id="@+id/img"
         android:layout_width="fill_parent"
         android:layout_height="300dp"
         android:scaleType="fitXY"
@@ -27,5 +26,6 @@
         android:padding="10dp"
         android:spacing="5dp"
         android:unselectedAlpha="50" />
+
 
 </LinearLayout>

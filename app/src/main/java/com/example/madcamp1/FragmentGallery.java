@@ -1,5 +1,6 @@
 package com.example.madcamp1;
 
+import android.content.Context;
 import android.content.res.AssetManager;
 import android.media.Image;
 import android.os.Bundle;
@@ -8,7 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.viewpager.widget.ViewPager;
 
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
@@ -17,8 +20,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Gallery;
 import android.widget.ImageView;
-import uk.co.senab.photoview.PhotoViewAttacher;
 
+import com.github.chrisbanes.photoview.PhotoViewAttacher;
 
 import java.util.List;
 
@@ -44,7 +47,7 @@ public class FragmentGallery extends Fragment {
         v = inflater.inflate(R.layout.fragment_gallery, container, false);
 
         simpleGallery = v.findViewById(R.id.languagesGallery);
-        selectedImageView = v.findViewById(R.id.imageView);
+        selectedImageView = v.findViewById(R.id.img);
 
         // initialize the adapter
         CustomizedGalleryAdapter customGalleryAdapter = new CustomizedGalleryAdapter(getContext(), images);
@@ -61,7 +64,8 @@ public class FragmentGallery extends Fragment {
             }
         });
 
-        mAttacher = new PhotoViewAttacher(selectedImageView);
+
+
 
         return v;
     }
@@ -71,6 +75,38 @@ public class FragmentGallery extends Fragment {
         super.onCreate(savedInstanceState);
 
     }
+
+    public class CustomViewPager extends ViewPager {
+
+        public CustomViewPager(Context context) {
+            super(context);
+        }
+
+        public CustomViewPager(Context context, AttributeSet attrs) {
+            super(context, attrs);
+        }
+
+        @Override
+        public boolean onTouchEvent(MotionEvent ev) {
+            try {
+                return super.onTouchEvent(ev);
+            } catch (IllegalArgumentException ex) {
+                ex.printStackTrace();
+            }
+            return false;
+        }
+
+        @Override
+        public boolean onInterceptTouchEvent(MotionEvent ev) {
+            try {
+                return super.onInterceptTouchEvent(ev);
+            } catch (IllegalArgumentException ex) {
+                ex.printStackTrace();
+            }
+            return false;
+        }
+    }
+
 
 
 
