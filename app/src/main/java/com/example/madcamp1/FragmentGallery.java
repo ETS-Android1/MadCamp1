@@ -1,6 +1,7 @@
 package com.example.madcamp1;
 
 import android.content.res.AssetManager;
+import android.media.Image;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,11 +10,15 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Gallery;
 import android.widget.ImageView;
+import uk.co.senab.photoview.PhotoViewAttacher;
+
 
 import java.util.List;
 
@@ -29,6 +34,10 @@ public class FragmentGallery extends Fragment {
 
     public FragmentGallery() {
     }
+
+    ImageView m_imageview;
+    PhotoViewAttacher mAttacher;
+
 
     @Nullable
     @Override
@@ -53,11 +62,18 @@ public class FragmentGallery extends Fragment {
             }
         });
 
+        mAttacher = new PhotoViewAttacher(selectedImageView);
+
         return v;
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
+
+
+
 }
+
