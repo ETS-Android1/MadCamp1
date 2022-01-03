@@ -103,7 +103,7 @@ public class FragmentContact extends Fragment {
             public void onClick(View v) {
 
             }
-        });88
+        });
 
         return v;
     }

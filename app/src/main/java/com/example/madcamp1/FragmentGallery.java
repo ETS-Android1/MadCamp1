@@ -25,6 +25,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Gallery;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.github.chrisbanes.photoview.PhotoViewAttacher;
 
@@ -47,13 +48,14 @@ public class FragmentGallery extends Fragment {
 
     PhotoViewAttacher mAttacher;
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_gallery, container, false);
 
         Button btn = v.findViewById(R.id.button);
+        Button btn2 = v.findViewById(R.id.button2);
+
         simpleGallery = v.findViewById(R.id.languagesGallery);
         selectedImageView = v.findViewById(R.id.img);
 
@@ -72,7 +74,7 @@ public class FragmentGallery extends Fragment {
             }
         });
 
-        //버 클릭 시튼
+        //버튼 1 클릭 시
         btn.setOnClickListener(new View.OnClickListener() {
             @Override //이미지 불러오기기(갤러리 접근)
             public void onClick(View v) {
@@ -83,6 +85,15 @@ public class FragmentGallery extends Fragment {
             }
         });
 
+        //버튼 2 클릭 시
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override //이미지 불러오기기(갤러리 접근)
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), FragmentGallery2.class);
+                startActivity(intent);
+
+            }
+        });
 
         return v;
     }
@@ -90,9 +101,6 @@ public class FragmentGallery extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-
     }
 
     public class CustomViewPager extends ViewPager {
