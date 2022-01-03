@@ -31,13 +31,15 @@ import java.util.ArrayList;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
+
 import static android.content.Context.CLIPBOARD_SERVICE;
 
 
-public class FragmentVoiceRecord extends Fragment implements View.OnClickListener {
+public class FragmentVoiceRecord extends Fragment {
     View v;
     private Intent intent;
     private TextView log;
+    private String recordedString;
 
     public static final int REQUEST_CODE = 2;
 
@@ -56,23 +58,23 @@ public class FragmentVoiceRecord extends Fragment implements View.OnClickListene
         v = inflater.inflate(R.layout.fragment_voice_record, container, false);
         FloatingActionButton fab = v.findViewById(R.id.fab);
         log = v.findViewById(R.id.tvVoice);
-        fab.setOnClickListener(this);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switch (view.getId()) {
+                    case R.id.fab:
+                        Snackbar.make(view, "Microphone Activated", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                        VoiceTask voiceTask = new VoiceTask();
+                        voiceTask.execute();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
 
         return v;
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.fab:
-                Snackbar.make(view, "Microphone Activated", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                VoiceTask voiceTask = new VoiceTask();
-                voiceTask.execute();
-                break;
-            default:
-                break;
-        }
     }
 
     public class VoiceTask extends AsyncTask<String, Integer, String> {
@@ -113,6 +115,7 @@ public class FragmentVoiceRecord extends Fragment implements View.OnClickListene
                     .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
 
             String str = results.get(0);
+            recordedString = str;
             Toast.makeText(v.getContext(), "필기에 성공했습니다", Toast.LENGTH_SHORT).show();
 
             TextView tv = v.findViewById(R.id.tvVoice);
@@ -122,9 +125,10 @@ public class FragmentVoiceRecord extends Fragment implements View.OnClickListene
 
             tv.setOnClickListener(new View.OnClickListener() {
                 final Context context = getActivity().getApplicationContext();
+
                 @Override
                 public void onClick(View view) {
-                    ClipboardManager cm = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
+                    ClipboardManager cm = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
                     cm.setText(tv.getText());
                     Toast.makeText(context, "Copied to clipboard", Toast.LENGTH_SHORT).show();
                 }
@@ -133,6 +137,4 @@ public class FragmentVoiceRecord extends Fragment implements View.OnClickListene
         }
 
     }
-
-
 }

@@ -18,27 +18,68 @@ import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
-public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewAdapter2.MyViewHolder> {
+public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewAdapter2.MyViewHolder> implements Filterable {
 
     Context mContext;
     List<ContactItem> mData;
+    List<ContactItem> filteredList;
     Dialog mDialog;
 
     public RecyclerViewAdapter2(Context mContext, List<ContactItem> mData) {
         this.mContext = mContext;
         this.mData = mData;
+        filteredList = mData;
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String charString = constraint.toString();
+                if (charString.isEmpty()) {
+                    filteredList = mData;
+                } else {
+                    List<ContactItem> filteringList = new ArrayList<>();
+                    for (int i = 0; i < mData.size(); i++) {
+                        ContactItem item = mData.get(i);
+                        if (item.getName().toLowerCase().contains(charString.toLowerCase())) {
+                            filteringList.add(item);
+                            System.out.println("newItem - " + item.getName());
+                        }
+                    }
+                    filteredList = filteringList;
+                    System.out.print("filteredList: ");
+                    for (int i = 0; i < filteredList.size(); i++) {
+                        System.out.print(filteredList.get(i).getName() + " ");
+                    }
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = filteredList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                filteredList = (ArrayList<ContactItem>) results.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -48,8 +89,6 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewAdapt
         private ImageView img;
         private TextView tv_name;
         private TextView tv_phone;
-
-
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);

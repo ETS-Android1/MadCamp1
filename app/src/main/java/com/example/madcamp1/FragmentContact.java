@@ -1,16 +1,20 @@
 package com.example.madcamp1;
 
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.renderscript.ScriptGroup;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,33 +22,28 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 
-public class FragmentContact extends Fragment {
+public class FragmentContact extends Fragment implements TextWatcher {
 
     View v;
+    private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView myrecyclerview;
-    private List<Contact> contactList;
+    private RecyclerViewAdapter2 recyclerViewAdapter2;
     private List<ContactItem> contactItemList;
     private FloatingActionButton fab_main;
     private FloatingActionButton fab_add;
     private FloatingActionButton fab_search;
     private TextView fab_add_text;
     private TextView fab_search_text;
+    private ImageView search_disable_button;
     boolean fabVisible = false;
-    private EditText emailAddress = null;
-    private EditText phoneNumber = null;
+    private EditText editText;
 
     public FragmentContact() {
     }
@@ -56,9 +55,7 @@ public class FragmentContact extends Fragment {
         contactItemList = getContactItemList();
 
         myrecyclerview = v.findViewById(R.id.contact_recyclerview);
-        RecyclerViewAdapter2 recyclerViewAdapter2 = new RecyclerViewAdapter2(getContext(), contactItemList);
-        myrecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
-        myrecyclerview.setAdapter(recyclerViewAdapter2);
+        swipeRefreshLayout = v.findViewById(R.id.swiperefreshlayout);
         fab_main = v.findViewById(R.id.fab);
         fab_add = v.findViewById(R.id.fab_add);
         fab_search = v.findViewById(R.id.fab_search);
@@ -68,7 +65,26 @@ public class FragmentContact extends Fragment {
         fab_search.setVisibility(View.GONE);
         fab_add_text.setVisibility(View.GONE);
         fab_search_text.setVisibility(View.GONE);
+        search_disable_button = v.findViewById(R.id.search_disable_button);
 
+        editText = v.findViewById(R.id.edittext);
+        editText.addTextChangedListener(this);
+        editText.setVisibility(View.GONE);
+        search_disable_button.setVisibility(View.GONE);
+
+        recyclerViewAdapter2 = new RecyclerViewAdapter2(getContext(), contactItemList);
+        myrecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
+        myrecyclerview.setAdapter(recyclerViewAdapter2);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                contactItemList = getContactItemList();
+                recyclerViewAdapter2 = new RecyclerViewAdapter2(getContext(), contactItemList);
+                myrecyclerview.setAdapter(recyclerViewAdapter2);
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
         fab_main.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,12 +98,13 @@ public class FragmentContact extends Fragment {
                 } else {
                     fab_add.hide();
                     fab_search.hide();
+                    fabVisible = false;
                     fab_add_text.setVisibility(View.GONE);
                     fab_search_text.setVisibility(View.GONE);
-                    fabVisible = false;
                 }
             }
         });
+
 
         fab_add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,13 +112,32 @@ public class FragmentContact extends Fragment {
                 Intent intent = new Intent(ContactsContract.Intents.Insert.ACTION);
                 intent.setType(ContactsContract.RawContacts.CONTENT_TYPE);
                 startActivity(intent);
+                fab_add.hide();
+                fab_search.hide();
+                fab_add_text.setVisibility(View.GONE);
+                fab_search_text.setVisibility(View.GONE);
             }
         });
 
         fab_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                editText.setVisibility(View.VISIBLE);
+                search_disable_button.setVisibility(View.VISIBLE);
+                fab_add.hide();
+                fab_search.hide();
+                fab_add_text.setVisibility(View.GONE);
+                fab_search_text.setVisibility(View.GONE);
+                fabVisible = false;
+            }
+        });
 
+        search_disable_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                editText.setVisibility(View.GONE);
+                search_disable_button.setVisibility(View.GONE);
             }
         });
 
@@ -121,7 +157,6 @@ public class FragmentContact extends Fragment {
                 ContactsContract.Contacts.PHOTO_ID,
                 ContactsContract.RawContacts.CONTACT_ID
         };
-        String[] selectionArgs = null;
         String sortOrder = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " COLLATE LOCALIZED ASC";
         Cursor cursor = getActivity().getContentResolver().query(uri, projection, null, null, sortOrder);
         LinkedHashSet<ContactItem> hashlist = new LinkedHashSet<>();
@@ -148,48 +183,21 @@ public class FragmentContact extends Fragment {
         }
         return contactItems;
     }
-/*
-    public void InitializeContact() {
-        contactList = new ArrayList<>();
-        String json;
-        json = getJsonString();
-        parseJson(json);
+
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
     }
 
-
-    private String getJsonString() {
-        String json = "";
-        try {
-            AssetManager am = getResources().getAssets();
-            InputStream is = getActivity().getAssets().open("contact.json");
-            int fileSize = is.available();
-
-            byte[] buffer = new byte[fileSize];
-            is.read(buffer);
-            is.close();
-
-            json = new String(buffer, "UTF-8");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return json;
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        recyclerViewAdapter2.getFilter().filter(charSequence);
     }
 
-    private void parseJson(String json) {
-        try {
-            JSONObject jsonObject = new JSONObject(json);
-            JSONArray contactArray = jsonObject.getJSONArray("Contact");
-
-            for (int i = 0; i < contactArray.length(); i++) {
-                JSONObject contactObject = contactArray.getJSONObject(i);
-                Contact contact = new Contact();
-                contact.setName(contactObject.getString("name"));
-                contact.setPhone(contactObject.getString("phone_number"));
-                contactList.add(contact);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+    @Override
+    public void afterTextChanged(Editable editable) {
+        myrecyclerview.invalidate();
+        myrecyclerview.setAdapter(recyclerViewAdapter2);
     }
- */
+
 }
