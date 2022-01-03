@@ -1,5 +1,6 @@
 package com.example.madcamp1;
 
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -9,12 +10,16 @@ import android.renderscript.ScriptGroup;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,6 +37,14 @@ public class FragmentContact extends Fragment {
     private RecyclerView myrecyclerview;
     private List<Contact> contactList;
     private List<ContactItem> contactItemList;
+    private FloatingActionButton fab_main;
+    private FloatingActionButton fab_add;
+    private FloatingActionButton fab_search;
+    private TextView fab_add_text;
+    private TextView fab_search_text;
+    boolean fabVisible = false;
+    private EditText emailAddress = null;
+    private EditText phoneNumber = null;
 
     public FragmentContact() {
     }
@@ -40,11 +53,57 @@ public class FragmentContact extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_contact, container, false);
+        contactItemList = getContactItemList();
 
         myrecyclerview = v.findViewById(R.id.contact_recyclerview);
         RecyclerViewAdapter2 recyclerViewAdapter2 = new RecyclerViewAdapter2(getContext(), contactItemList);
         myrecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         myrecyclerview.setAdapter(recyclerViewAdapter2);
+        fab_main = v.findViewById(R.id.fab);
+        fab_add = v.findViewById(R.id.fab_add);
+        fab_search = v.findViewById(R.id.fab_search);
+        fab_add_text = v.findViewById(R.id.fab_add_text);
+        fab_search_text = v.findViewById(R.id.fab_search_text);
+        fab_add.setVisibility(View.GONE);
+        fab_search.setVisibility(View.GONE);
+        fab_add_text.setVisibility(View.GONE);
+        fab_search_text.setVisibility(View.GONE);
+
+
+        fab_main.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!fabVisible) {
+                    fab_add.show();
+                    fab_search.show();
+                    fab_add_text.setVisibility(View.VISIBLE);
+                    fab_search_text.setVisibility(View.VISIBLE);
+                    fabVisible = true;
+                } else {
+                    fab_add.hide();
+                    fab_search.hide();
+                    fab_add_text.setVisibility(View.GONE);
+                    fab_search_text.setVisibility(View.GONE);
+                    fabVisible = false;
+                }
+            }
+        });
+
+        fab_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ContactsContract.Intents.Insert.ACTION);
+                intent.setType(ContactsContract.RawContacts.CONTENT_TYPE);
+                startActivity(intent);
+            }
+        });
+
+        fab_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });88
 
         return v;
     }
@@ -52,8 +111,6 @@ public class FragmentContact extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        InitializeContact();
-        contactItemList = getContactItemList();
     }
 
     public ArrayList<ContactItem> getContactItemList() {
@@ -91,7 +148,7 @@ public class FragmentContact extends Fragment {
         }
         return contactItems;
     }
-
+/*
     public void InitializeContact() {
         contactList = new ArrayList<>();
         String json;
@@ -134,4 +191,5 @@ public class FragmentContact extends Fragment {
             e.printStackTrace();
         }
     }
+ */
 }
