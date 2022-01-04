@@ -11,7 +11,7 @@
 
  이 앱의 이름은 `PocketApp`이다. 총 3개의 탭으로 구성하였으며 tabLayout에 fragment를 넣어 각각의 탭에 연락처, 갤러리, 보이스 노트 기능을 넣었다. 앱이 실행될 때 일정 시간 동안 시작 화면을 띄운 후 `MainActivity`를 실행한다.
 
-<img src = "https://user-images.githubusercontent.com/48681924/148020226-a94c2a7c-9923-4687-ab61-77e183e77a0a.jpg" width="20%" height="20%">
+<div align=center> <img src = "https://user-images.githubusercontent.com/48681924/148020226-a94c2a7c-9923-4687-ab61-77e183e77a0a.jpg" width="30%" height="30%"></div>
 
 ## Tab 1: Contact
 
@@ -31,7 +31,7 @@
 
  표시된 연락처를 누르면 연락처에 설정된 프로필 이미지를 화질 저하 없이 크게 볼 수 있게 만들었다. 별도의 창으로 나타나며 이름과 전화번호부도 같이 표시된다.
  
- <img src = "https://user-images.githubusercontent.com/48681924/148014507-fcdb471e-816a-4a96-ac26-4512d78ee7d1.jpg" width="20%" height="20%">
+<div align=center>  <img src = "https://user-images.githubusercontent.com/48681924/148014507-fcdb471e-816a-4a96-ac26-4512d78ee7d1.jpg" width="30%" height="30%"> </div>
  
 ### Function 3: Move to Call / Message
 
@@ -41,11 +41,11 @@
 
  우측 하단의 `Floating Action Buttion(FAB)`을 누르면 2개의 버튼이 추가로 나타난다. 연락처 검색 기능은 Search가 옆에 적혀있는 돋보기 모양의 위쪽 버튼을 누르면 작동한다. 작동시 `EditText`와 `X button`의 Visibility가 Visible로 바뀌면서 타이핑 할 수 있는 부분이 나타나고 FAB을 눌렀을 때 나타났던 2개의 버튼은 다시 사라지게 된다.
  
- <img src = "https://user-images.githubusercontent.com/48681924/148014438-54d22732-76ed-4c30-8d87-0a471353b389.jpg" width="20%" height="20%">
+<div align=center>  <img src = "https://user-images.githubusercontent.com/48681924/148014438-54d22732-76ed-4c30-8d87-0a471353b389.jpg" width="30%" height="30%"> </div> 
 
  글자가 입력될 때마다 Device에서 받아온 Contact들과 이름 값을 비교해 실시간으로 검색어가 이름에 포함되어 있는 연락처들을 표시한다. 한글은 음절별로 검색이 진행되며, 영어는 글자별로 검색된다(대, 소문자 무시). 검색어가 입력되지 않은 경우에는 전체 리스트를 띄운다.
  
- <img src = "https://user-images.githubusercontent.com/48681924/148014178-6be17884-537d-43ea-bf8f-c9cc51379d06.jpg" width="20%" height="20%">
+ <div align=center> <img src = "https://user-images.githubusercontent.com/48681924/148014178-6be17884-537d-43ea-bf8f-c9cc51379d06.jpg" width="30%" height="30%"> </div>
 
  검색을 중지할 때는 `X button`을 누르면 된다. `EditText`와 `X button`이 모두 사라지며 입력되었던 검색어도 전부 지워지게 된다.
 
@@ -66,7 +66,7 @@
 
  아래에 있는 이미지 목록 중 하나를 선택하면 상단에 사진이 크게 뜨게 만들었다. 이미지 목록은 `Gallery Viewer`를 이용하여 Horizontal하게 구현하였으며 animation duration 시간을 조절하여 자연스럽게 넘어가게 하였다. `com.github.chrisbanes:PhotoView`를 이용하여 상단에 뜬 사진을 더블 클릭하거나 두 손가락 스크롤을 통해 확대 및 축소할 수 있게 하였다. `Custom Viewpager`을 선언하여 이용하였다.
 
-<img src = "https://user-images.githubusercontent.com/48681924/148020351-a22384d1-3b75-48cc-95be-cacb5472f930.jpg" width="20%" height="20%">
+<div align=center>  <img src = "https://user-images.githubusercontent.com/48681924/148020351-a22384d1-3b75-48cc-95be-cacb5472f930.jpg" width="30%" height="30%"> </div>
 
 ### Function 2: Get Image from Device
 
@@ -75,7 +75,7 @@
 ### Function 3: Search Images
  `Pixabay 이미지 검색` 버튼을 클릭하면 해당 프래그먼트에서 새로운 액티비티로 이동한다. 액티비티 상단에 있는 검색 기능을 통해 검색어를 입력하면, `Pixabay API`의 고유키를 이용하여 url을 생성해서 request를 보낸다. 이후, 해당 request에 대해 JSON Array를 받아오고 각 오브젝트에 대한 image url을 받아와서 이미지 리스트를 만든다. 그리고 해당 이미지 리스트를 `Recycler view`를 통해 액티비티에 뜨게 만들었다. 이미지 검색이 끝난 후, `이전으로 돌아가기` 버튼을 클릭하면 기존의 갤러리 탭으로 다시 돌아가게 만들었다.
 
-<img src = "https://user-images.githubusercontent.com/48681924/148020440-1af94713-0312-4480-8e44-cea800e9c124.jpg" width="20%" height="20%">
+<div align=center> <img src = "https://user-images.githubusercontent.com/48681924/148020440-1af94713-0312-4480-8e44-cea800e9c124.jpg" width="30%" height="30%"> </div>
 
 ## Tab 3: Voice Note
 
@@ -87,12 +87,14 @@
 ### Function 1: Speech-to-Text
 
  우측 하단의 `Floating Action Buttion(FAB)`을 누르면 언어(한국어/영어)를 선택할 수 있는 버튼이 나타난다.
- 
-<img src = "https://user-images.githubusercontent.com/48681924/148020771-3af826fb-1d22-4062-80ab-1e5affe01736.jpg" width="20%" height="20%">
+
+
+<div align=center> <img src = "https://user-images.githubusercontent.com/48681924/148020771-3af826fb-1d22-4062-80ab-1e5affe01736.jpg" width="20%" height="20%"> </div>
+
 
  사용자가 특정 언어를 선택하면 우측 하단의 스피커 모양 FAB을 누르면 음성 인식 기능을 비동기 실행하여 `Google Speech API`에서 제공하는 음성 인식 기능으로 이동된다. 그 뒤, 사용자가 설정한 언어를 기반으로 인식하여 화면에 텍스트가 표시된다.
 
-<img src = "https://user-images.githubusercontent.com/48681924/148020539-401bf7e4-48d6-44e9-9f55-8fbc29e10c42.jpg" width="20%" height="20%">
+<div align=center> <img src = "https://user-images.githubusercontent.com/48681924/148020539-401bf7e4-48d6-44e9-9f55-8fbc29e10c42.jpg" width="20%" height="20%"> </div>
 
 ### Function 2: Copy Text
 
