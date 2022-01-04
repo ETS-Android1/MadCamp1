@@ -135,7 +135,7 @@ public class FragmentContact extends Fragment implements TextWatcher {
         search_disable_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                editText.setText(null);
                 editText.setVisibility(View.GONE);
                 search_disable_button.setVisibility(View.GONE);
             }
