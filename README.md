@@ -9,7 +9,7 @@
 
 ## Introduction
 
- 이 앱의 이름은 `PocketApp`이다. 연락처, 갤러리, 보이스 노트 기능을 각각의 탭에 넣어 3개의 탭(Fragment)으로 구성하였다. 앱이 실행될 때 일정 시간 동안 시작 화면을 띄운다 `MainActivity`를 실행한다.
+ 이 앱의 이름은 `PocketApp`이다. 총 3개의 탭으로 구성하였으며 tabLayout에 fragment를 넣어 각각의 탭에 연락처, 갤러리, 보이스 노트 기능을 넣었다. 앱이 실행될 때 일정 시간 동안 시작 화면을 띄운 후 `MainActivity`를 실행한다.
 
 <img src = "https://user-images.githubusercontent.com/48681924/148020226-a94c2a7c-9923-4687-ab61-77e183e77a0a.jpg" width="20%" height="20%">
 
