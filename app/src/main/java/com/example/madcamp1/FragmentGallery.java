@@ -43,11 +43,11 @@ public class FragmentGallery extends Fragment {
     // array of images, here taken 10 different kind of most popular programming languages
     private int[] images = {
             R.drawable.picture1, R.drawable.picture2, R.drawable.photo3,
-            R.drawable.photo4, R.drawable.photo5, R.drawable.battleground,
-            R.drawable.bird, R.drawable.chicken, R.drawable.codingmonkey,
-            R.drawable.ilovemoney, R.drawable.kaist, R.drawable.krafton,
-            R.drawable.landscape, R.drawable.light, R.drawable.nuriho,
-            R.drawable.saranghaeyo, R.drawable.snowman};
+            R.drawable.photo4, R.drawable.greenday, R.drawable.feyman2, R.drawable.feynman,
+            R.drawable.blur, R.drawable.am, R.drawable.rh1, R.drawable.rh2,
+            R.drawable.network, R.drawable.network2,R.drawable.photo5,
+            R.drawable.smashing2, R.drawable.mcr1, R.drawable.mcr2,
+            R.drawable.oasis1, R.drawable.oasis2, R.drawable.ohd, R.drawable.photo5};
 
     public FragmentGallery() {
     }
