@@ -63,6 +63,10 @@ public class FragmentVoiceRecord extends Fragment {
         FloatingActionButton fab_eng = v.findViewById(R.id.fab_eng);
         TextView fab_kor_text = v.findViewById(R.id.fab_kor_text);
         TextView fab_eng_text = v.findViewById(R.id.fab_eng_text);
+        fab_kor.hide();
+        fab_eng.hide();
+        fab_kor_text.setVisibility(View.GONE);
+        fab_eng_text.setVisibility(View.GONE);
         log = v.findViewById(R.id.tvVoice);
 
         fab_main.setOnClickListener(new View.OnClickListener() {
