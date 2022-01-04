@@ -9,7 +9,9 @@
 
 ## Introduction
 
-이 앱의 이름은 `PocketApp`이다. 연락처, 갤러리, 보이스 노트 기능을 각각의 탭에 넣어 3개의 탭(Fragment)으로 구성하였다. 앱이 실행될 때 일정 시간 동안 시작 화면을 띄운다 `MainActivity`를 실행한다.
+ 이 앱의 이름은 `PocketApp`이다. 연락처, 갤러리, 보이스 노트 기능을 각각의 탭에 넣어 3개의 탭(Fragment)으로 구성하였다. 앱이 실행될 때 일정 시간 동안 시작 화면을 띄운다 `MainActivity`를 실행한다.
+
+<img src = "https://user-images.githubusercontent.com/48681924/148020226-a94c2a7c-9923-4687-ab61-77e183e77a0a.jpg" width="20%" height="20%">
 
 ## Tab 1: Contact
 
@@ -62,16 +64,18 @@
 
 ### Function 1: Show Images of Application
 
-아래에 있는 이미지 목록 중 하나를 선택하면 상단에 사진이 크게 뜨게 만들었다. 이미지 목록은 `Gallery Viewer`를 이용하여 Horizontal하게 구현하였으며 animation duration 시간을 조절하여 자연스럽게 넘어가게 하였다. `com.github.chrisbanes:PhotoView`를 이용하여 상단에 뜬 사진을 더블 클릭하거나 두 손가락 스크롤을 통해 확대 및 축소할 수 있게 하였다. `Custom Viewpager`을 선언하여 이용하였다.
+ 아래에 있는 이미지 목록 중 하나를 선택하면 상단에 사진이 크게 뜨게 만들었다. 이미지 목록은 `Gallery Viewer`를 이용하여 Horizontal하게 구현하였으며 animation duration 시간을 조절하여 자연스럽게 넘어가게 하였다. `com.github.chrisbanes:PhotoView`를 이용하여 상단에 뜬 사진을 더블 클릭하거나 두 손가락 스크롤을 통해 확대 및 축소할 수 있게 하였다. `Custom Viewpager`을 선언하여 이용하였다.
 
+<img src = "https://user-images.githubusercontent.com/48681924/148020351-a22384d1-3b75-48cc-95be-cacb5472f930.jpg" width="20%" height="20%">
 
 ### Function 2: Get Image from Device
 
-`휴대폰 갤러리 모드` 버튼을 클릭하면 휴대폰 기기에 내장된 갤러리로 이동하게 만들었다. 그런 뒤, 갤러리에서 사진을 하나 클릭하면 선택한 이미지에서 비트맵을 생성하여 이미지뷰에 해당 사진이 세팅되게 만들었다.
-
+ `휴대폰 갤러리 모드` 버튼을 클릭하면 휴대폰 기기에 내장된 갤러리로 이동하게 만들었다. 그런 뒤, 갤러리에서 사진을 하나 클릭하면 선택한 이미지에서 비트맵을 생성하여 이미지뷰에 해당 사진이 세팅되게 만들었다.
 
 ### Function 3: Search Images
-`Pixabay 이미지 검색` 버튼을 클릭하면 해당 프래그먼트에서 새로운 액티비티로 이동한다. 액티비티 상단에 있는 검색 기능을 통해 검색어를 입력하면, `Pixabay API`의 고유키를 이용하여 url을 생성해서 request를 보낸다. 이후, 해당 request에 대해 JSON Array를 받아오고 각 오브젝트에 대한 image url을 받아와서 이미지 리스트를 만든다. 그리고 해당 이미지 리스트를 `Recycler view`를 통해 액티비티에 뜨게 만들었다. 이미지 검색이 끝난 후, `이전으로 돌아가기` 버튼을 클릭하면 기존의 갤러리 탭으로 다시 돌아가게 만들었다.
+ `Pixabay 이미지 검색` 버튼을 클릭하면 해당 프래그먼트에서 새로운 액티비티로 이동한다. 액티비티 상단에 있는 검색 기능을 통해 검색어를 입력하면, `Pixabay API`의 고유키를 이용하여 url을 생성해서 request를 보낸다. 이후, 해당 request에 대해 JSON Array를 받아오고 각 오브젝트에 대한 image url을 받아와서 이미지 리스트를 만든다. 그리고 해당 이미지 리스트를 `Recycler view`를 통해 액티비티에 뜨게 만들었다. 이미지 검색이 끝난 후, `이전으로 돌아가기` 버튼을 클릭하면 기존의 갤러리 탭으로 다시 돌아가게 만들었다.
+
+<img src = "https://user-images.githubusercontent.com/48681924/148020440-1af94713-0312-4480-8e44-cea800e9c124.jpg" width="20%" height="20%">
 
 ## Tab 3: Voice Note
 
@@ -82,11 +86,17 @@
 
 ### Function 1: Speech-to-Text
 
-우측 하단의 `Floating Action Buttion(FAB)`을 누르면 언어(한국어/영어)를 선택할 수 있는 버튼이 나타난다. 사용자가 특정 언어를 선택하면 우측 하단의 스피커 모양 FAB을 누르면 음성 인식 기능을 비동기 실행하여 `Google Speech API`에서 제공하는 음성 인식 기능으로 이동된다. 그 뒤, 사용자가 설정한 언어를 기반으로 인식하여 화면에 텍스트가 표시된다.
+ 우측 하단의 `Floating Action Buttion(FAB)`을 누르면 언어(한국어/영어)를 선택할 수 있는 버튼이 나타난다.
+ 
+<img src = "https://user-images.githubusercontent.com/48681924/148020771-3af826fb-1d22-4062-80ab-1e5affe01736.jpg" width="20%" height="20%">
+
+ 사용자가 특정 언어를 선택하면 우측 하단의 스피커 모양 FAB을 누르면 음성 인식 기능을 비동기 실행하여 `Google Speech API`에서 제공하는 음성 인식 기능으로 이동된다. 그 뒤, 사용자가 설정한 언어를 기반으로 인식하여 화면에 텍스트가 표시된다.
+
+<img src = "https://user-images.githubusercontent.com/48681924/148020539-401bf7e4-48d6-44e9-9f55-8fbc29e10c42.jpg" width="20%" height="20%">
 
 ### Function 2: Copy Text
 
- 사용자 편의를 위해 `Clipboard Manager`를 이용하여 필기 완료된 텍스트를 한번 누르면 자동으로 클립보드에 저장되도록 하였다..
+ 사용자 편의를 위해 `Clipboard Manager`를 이용하여 필기 완료된 텍스트를 한번 누르면 자동으로 클립보드에 저장되도록 하였다.
 
 
 ---
