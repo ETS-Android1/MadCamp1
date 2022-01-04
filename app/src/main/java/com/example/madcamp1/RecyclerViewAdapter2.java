@@ -36,14 +36,14 @@ import java.util.List;
 public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewAdapter2.MyViewHolder> implements Filterable {
 
     Context mContext;
-    List<ContactItem> mData;
+    List<ContactItem> unfilteredList;
     List<ContactItem> filteredList;
     Dialog mDialog;
 
     public RecyclerViewAdapter2(Context mContext, List<ContactItem> mData) {
         this.mContext = mContext;
-        this.mData = mData;
-        filteredList = mData;
+        this.unfilteredList = mData;
+        this.filteredList = mData;
     }
 
     @Override
@@ -53,11 +53,11 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewAdapt
             protected FilterResults performFiltering(CharSequence constraint) {
                 String charString = constraint.toString();
                 if (charString.isEmpty()) {
-                    filteredList = mData;
+                    filteredList = unfilteredList;
                 } else {
                     List<ContactItem> filteringList = new ArrayList<>();
-                    for (int i = 0; i < mData.size(); i++) {
-                        ContactItem item = mData.get(i);
+                    for (int i = 0; i < unfilteredList.size(); i++) {
+                        ContactItem item = unfilteredList.get(i);
                         if (item.getName().toLowerCase().contains(charString.toLowerCase())) {
                             filteringList.add(item);
                             System.out.println("newItem - " + item.getName());
@@ -120,10 +120,10 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewAdapt
                 TextView dialog_name_tv = mDialog.findViewById(R.id.dialog_name);
                 TextView dialog_phone_tv = mDialog.findViewById(R.id.dialog_phone);
                 ImageView dialog_contact_img = mDialog.findViewById(R.id.dialog_img);
-                dialog_name_tv.setText(mData.get(vHolder.getAdapterPosition()).getName());
-                dialog_phone_tv.setText(mData.get(vHolder.getAdapterPosition()).getPhone());
+                dialog_name_tv.setText(filteredList.get(vHolder.getAdapterPosition()).getName());
+                dialog_phone_tv.setText(filteredList.get(vHolder.getAdapterPosition()).getPhone());
 
-                dialog_contact_img.setImageBitmap(mData.get(vHolder.getAdapterPosition()).getPhoto());
+                dialog_contact_img.setImageBitmap(filteredList.get(vHolder.getAdapterPosition()).getPhoto());
 
                 mDialog.show();
             }
@@ -133,7 +133,7 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewAdapt
         vHolder.item_call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String phone_number = mData.get(vHolder.getAdapterPosition()).getPhone();
+                String phone_number = filteredList.get(vHolder.getAdapterPosition()).getPhone();
                 Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone_number));
                 mContext.startActivity(intent);
             }
@@ -141,7 +141,7 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewAdapt
         vHolder.item_msg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String phone_number = mData.get(vHolder.getAdapterPosition()).getPhone();
+                String phone_number = filteredList.get(vHolder.getAdapterPosition()).getPhone();
                 Uri smsUri = Uri.parse("sms:" + phone_number);
                 Intent sendIntent = new Intent(Intent.ACTION_SENDTO, smsUri);
                 mContext.startActivity(sendIntent);
@@ -153,7 +153,7 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewAdapt
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        ContactItem contactItem = mData.get(position);
+        ContactItem contactItem = filteredList.get(position);
         holder.tv_name.setText(contactItem.getName());
         holder.tv_phone.setText(contactItem.getPhone());
 
@@ -164,7 +164,7 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewAdapt
                 holder.img.setBackground(new ShapeDrawable(new OvalShape()));
                 holder.img.setClipToOutline(true);
             }
-            mData.get(holder.getAdapterPosition()).setPhoto(profile);
+            filteredList.get(holder.getAdapterPosition()).setPhoto(profile);
             holder.img.setImageBitmap(resizingBitmap(profile));
         } else {
             if (Build.VERSION.SDK_INT >= 21) {
@@ -176,7 +176,7 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewAdapt
 
     @Override
     public int getItemCount() {
-        return mData.size();
+        return filteredList.size();
     }
 
     public Bitmap loadContactPhoto(ContentResolver cr, long person_id, long photo_id) {
