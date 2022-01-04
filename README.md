@@ -39,7 +39,7 @@
 
 ### Function 4: Search Contact
 
- 우측 하단의 `Floating Action Buttion(FAB)`을 누르면 2개의 버튼이 추가로 나타난다. 연락처 검색 기능은 Search가 옆에 적혀있는 돋보기 모양의 위쪽 버튼을 누르면 작동한다. 작동시 `EditText`와 `X button`의 Visibility가 Visible로 바뀌면서 타이핑 할 수 있는 부분이 나타나고 FAB을 눌렀을 때 나타났던 2개의 버튼은 다시 사라지게 된다.
+ 우측 하단의 `Floating Action Button(FAB)`을 누르면 2개의 버튼이 추가로 나타난다. 연락처 검색 기능은 Search가 옆에 적혀있는 돋보기 모양의 위쪽 버튼을 누르면 작동한다. 작동시 `EditText`와 `X button`의 Visibility가 Visible로 바뀌면서 타이핑 할 수 있는 부분이 나타나고 FAB을 눌렀을 때 나타났던 2개의 버튼은 다시 사라지게 된다.
  
 <div align=center>  <img src = "https://user-images.githubusercontent.com/48681924/148014438-54d22732-76ed-4c30-8d87-0a471353b389.jpg" width="30%" height="30%"> </div> 
 
@@ -86,7 +86,7 @@
 
 ### Function 1: Speech-to-Text
 
- 우측 하단의 `Floating Action Buttion(FAB)`을 누르면 언어(한국어/영어)를 선택할 수 있는 버튼이 나타난다.
+ 우측 하단의 `Floating Action Button(FAB)`을 누르면 언어(한국어/영어)를 선택할 수 있는 버튼이 나타난다.
 
 
 <div align=center> <img src = "https://user-images.githubusercontent.com/48681924/148020771-3af826fb-1d22-4062-80ab-1e5affe01736.jpg" width="20%" height="20%"> </div>
