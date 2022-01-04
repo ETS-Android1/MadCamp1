@@ -26,7 +26,7 @@
         android:padding="10dp"
         android:spacing="7dp"
         android:unselectedAlpha="50"
-        android:background="#F4F4F4"/>
+        android:background="#FFFF"/>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
