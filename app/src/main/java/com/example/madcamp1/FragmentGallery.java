@@ -91,7 +91,6 @@ public class FragmentGallery extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), FragmentGallery2.class);
                 startActivity(intent);
-
             }
         });
 
