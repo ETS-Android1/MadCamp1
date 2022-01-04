@@ -27,7 +27,9 @@
 
 ### Function 2: Show Profile Image
 
- 표시된 연락처를 누르면 연락처에 설정된 프로필 이미지를 화질 저하 없이 크게 볼 수 있게 만들었다. 별도의 창으로 나타나며 이름과 전화번호부도 같이 표시된다.
+ 표시된 연락처를 누르면 연락처에 설정된 프로필 이미지를 화질 저하 없이 크게 볼 수 있게 만들었다. 별도의 창으로 나타나며 이름과 전화번호도 같이 표시된다.
+ 
+ <img src = "https://user-images.githubusercontent.com/48681924/148014507-fcdb471e-816a-4a96-ac26-4512d78ee7d1.jpg" width="20%" height="20%">
  
 ### Function 3: Move to Call / Message
 
@@ -37,7 +39,11 @@
 
  우측 하단의 Floating Action Buttion(FAB)을 누르면 2개의 버튼이 추가로 나타난다. 연락처 검색 기능은 Search가 옆에 적혀있는 돋보기 모양의 위쪽 버튼을 누르면 작동한다. 작동시 EditText와 X button의 Visibility가 Visible로 바뀌면서 타이핑 할 수 있는 부분이 나타나고 FAB을 눌렀을 때 나타났던 2개의 버튼은 다시 사라지게 된다.
 
+  <img src = "https://user-images.githubusercontent.com/48681924/148014438-54d22732-76ed-4c30-8d87-0a471353b389.jpg" width="20%" height="20%">
+
  글자가 입력될 때마다 Device에서 받아온 Contact들과 이름 값을 비교해 실시간으로 검색어가 이름에 포함되어 있는 연락처들을 표시한다. 한글은 음절별로 검색이 진행되며, 영어는 글자별로 검색된다(대, 소문자 무시). 검색어가 입력되지 않은 경우에는 전체 리스트를 띄운다.
+ 
+  <img src = "https://user-images.githubusercontent.com/48681924/148014178-6be17884-537d-43ea-bf8f-c9cc51379d06.jpg" width="20%" height="20%">
 
  검색을 중지할 때는 X button을 누르면 된다. EditText와 X button이 모두 사라지며 입력되었던 검색어도 전부 지워지게 된다.
 
