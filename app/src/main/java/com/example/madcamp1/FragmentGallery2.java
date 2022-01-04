@@ -68,7 +68,7 @@ public class FragmentGallery2 extends AppCompatActivity {
     }
 
     public void EventBtn3(View v) {
-        Toast.makeText(getApplicationContext(), "이전 화면", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "갤러리 탭으로 이동했습니다.", 10).show();
         finish();
     }
 
