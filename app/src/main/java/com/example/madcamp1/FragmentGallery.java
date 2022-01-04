@@ -41,7 +41,13 @@ public class FragmentGallery extends Fragment {
 
     // To show the selected language, we need this
     // array of images, here taken 10 different kind of most popular programming languages
-    private int[] images = {R.drawable.picture1, R.drawable.picture2, R.drawable.photo3,R.drawable.photo4, R.drawable.photo5};
+    private int[] images = {
+            R.drawable.picture1, R.drawable.picture2, R.drawable.photo3,
+            R.drawable.photo4, R.drawable.photo5, R.drawable.battleground,
+            R.drawable.bird, R.drawable.chicken, R.drawable.codingmonkey,
+            R.drawable.ilovemoney, R.drawable.kaist, R.drawable.krafton,
+            R.drawable.landscape, R.drawable.light, R.drawable.nuriho,
+            R.drawable.saranghaeyo, R.drawable.snowman};
 
     public FragmentGallery() {
     }
