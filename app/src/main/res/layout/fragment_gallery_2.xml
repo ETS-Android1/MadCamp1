@@ -5,28 +5,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".FragmentGallery2">
+    tools:context=".FragmentGallery2"
+    android:background="#ffffff">
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:onClick="EventBtn3"
         android:text="이전으로 돌아가기"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="48dp"
-        android:onClick="EventBtn3"/>
+        android:layout_gravity="right"
 
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="48dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+
+
         <EditText
             android:id="@+id/search_text"
-            android:layout_width="wrap_content"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:hint="검색어를 입력하세요"
+            android:hint="검색어를 입력하세요."
+            android:textColor="@android:color/darker_gray"
+            android:textColorHint="@android:color/darker_gray"
+            android:backgroundTint="@android:color/darker_gray"
             />
 
         <Button
@@ -43,6 +50,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:background="@android:color/darker_gray"/>
+        android:background="#fff" />
+
+    <ImageButton
+        android:id="@+id/textView"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="50dp"
+        android:gravity="center_horizontal"
+        android:src="@drawable/pixabay_light"
+        android:background="#ffff"
+        android:textColor="@android:color/darker_gray" />
+
 
 </LinearLayout>
