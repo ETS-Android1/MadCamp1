@@ -1,9 +1,10 @@
-# CS496 Imersive Camp (Winter 2021)
+# CS496 Immersive Camp (Winter 2021)
 
 # Project #1: Android Application
 
 ## Team
 강산아 ([https://github.com/sanakang0615](https://github.com/sanakang0615))
+
 송성민 ([https://github.com/reverg](https://github.com/reverg))
 
 ## Introduction
@@ -28,6 +29,8 @@
 
  표시된 연락처를 누르면 연락처에 설정된 프로필 이미지를 화질 저하 없이 크게 볼 수 있게 만들었다. 별도의 창으로 나타나며 이름과 전화번호부도 같이 표시된다.
  
+ <img src = "https://user-images.githubusercontent.com/48681924/148014507-fcdb471e-816a-4a96-ac26-4512d78ee7d1.jpg" width="20%" height="20%">
+ 
 ### Function 3: Move to Call / Message
 
  연락처 우측의 전화 / 문자 버튼을 누르면 해당하는 기능으로 이동하게 만들었다. Android의 기본 전화, 문자 기능으로 `Intent`를 통해 이동하게 하였고, 전화번호 값을 가지고 가도록 하여 사용자가 별도 입력 없이 바로 원하는 작업을 할 수 있게 하였다.
@@ -35,8 +38,12 @@
 ### Function 4: Search Contact
 
  우측 하단의 `Floating Action Buttion(FAB)`을 누르면 2개의 버튼이 추가로 나타난다. 연락처 검색 기능은 Search가 옆에 적혀있는 돋보기 모양의 위쪽 버튼을 누르면 작동한다. 작동시 `EditText`와 `X button`의 Visibility가 Visible로 바뀌면서 타이핑 할 수 있는 부분이 나타나고 FAB을 눌렀을 때 나타났던 2개의 버튼은 다시 사라지게 된다.
+ 
+ <img src = "https://user-images.githubusercontent.com/48681924/148014438-54d22732-76ed-4c30-8d87-0a471353b389.jpg" width="20%" height="20%">
 
  글자가 입력될 때마다 Device에서 받아온 Contact들과 이름 값을 비교해 실시간으로 검색어가 이름에 포함되어 있는 연락처들을 표시한다. 한글은 음절별로 검색이 진행되며, 영어는 글자별로 검색된다(대, 소문자 무시). 검색어가 입력되지 않은 경우에는 전체 리스트를 띄운다.
+ 
+ <img src = "https://user-images.githubusercontent.com/48681924/148014178-6be17884-537d-43ea-bf8f-c9cc51379d06.jpg" width="20%" height="20%">
 
  검색을 중지할 때는 `X button`을 누르면 된다. `EditText`와 `X button`이 모두 사라지며 입력되었던 검색어도 전부 지워지게 된다.
 
@@ -75,11 +82,11 @@
 
 ### Function 1: Speech-to-Text
 
-우측 하단의 `Floating Action Buttion(FAB)`을 누르면 언어(한국어/영어)를 선택할 수 있는 버튼이 나타난다. 사용자가 특정 언어를 선택하면 우측 하단의 스피커 모양 FAB을 누르면 음성 인식 기능을 비동기 실행하여 `Google Speech API`에서 제공하는 음성 인식 기능으로 이동된다. 그 뒤, 사용자가 설정한 언어를 기반으로 인식하여 화면에 텍스트가 표시다.
+우측 하단의 `Floating Action Buttion(FAB)`을 누르면 언어(한국어/영어)를 선택할 수 있는 버튼이 나타난다. 사용자가 특정 언어를 선택하면 우측 하단의 스피커 모양 FAB을 누르면 음성 인식 기능을 비동기 실행하여 `Google Speech API`에서 제공하는 음성 인식 기능으로 이동된다. 그 뒤, 사용자가 설정한 언어를 기반으로 인식하여 화면에 텍스트가 표시된다.
 
 ### Function 2: Copy Text
 
- 사용자 편의를 위해 `Clipboard Manager`를 이용하여 필기 완료된 텍스트를 일정 시간 동안 누르거나 더블 클릭하면 자동으로 휴대폰 클립보드에 저장하거나 공유할 수 있게 하였다.
+ 사용자 편의를 위해 `Clipboard Manager`를 이용하여 필기 완료된 텍스트를 한번 누르면 자동으로 클립보드에 저장되도록 하였다..
 
 
 ---
